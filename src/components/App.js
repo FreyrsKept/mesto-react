@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from '../logo.svg';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 import './App.css';
 
 function App() {
+function handleAvatarEdit(){
+}
+function handleProfileEdit(){
+}
+function handleAddPlace(){
+}
+function handleCardClick(){
+}
+function closePopups(){
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='page'>
+      <div className='page__content'>
+        <Header />
+        <Main
+          onEditAvatar={handleAvatarEdit}
+          onEditProfile={handleProfileEdit}
+          onAddPlace={handleAddPlace}
+          onCardClick={handleCardClick}
+        />
+        <Footer />
+        {/* <PopupWithForm
+        />
+        <PopupWithForm
+        />
+        <ImagePopup
+        /> */}
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
