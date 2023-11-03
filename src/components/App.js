@@ -11,12 +11,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(null)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(null)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(null)
-  const [isDeletePopupOpen, setDeletePopupOpen] = React.useState(null)
   const [selectedCard, setSelectedCard] = React.useState(null)
-
-function handleCardDelete(){
-  setDeletePopupOpen(true);
-}
 
 function handleAvatarEdit(){
   setIsEditAvatarPopupOpen(true);
@@ -50,16 +45,16 @@ function closePopups(){
           onEditProfile={handleProfileEdit}
           onAddPlace={handleAddPlace}
           onCardClick={handleCardClick}
-          onCardDelete={handleCardDelete}
         />
         <Footer />
 
         <PopupWithForm 
         isOpen={isEditProfilePopupOpen}
         onClose={closePopups}
+        name={'edit'}
         form={'profileSettings'}
         title={'Редактировать профиль'}
-        name={'edit'}
+        buttonText={'Сохранить'}
         children={(
           <>
           <input name="name" id="username-input" type="text" placeholder="Ваше имя" className="popup__input" minLength="2" maxLength="40" required/>
@@ -73,9 +68,10 @@ function closePopups(){
         <PopupWithForm 
         isOpen={isAddPlacePopupOpen}
         onClose={closePopups}
+        name={'add'}
         form={'placeAdd'}
         title={'Новое место'}
-        name={'add'}
+        buttonText={'Создать'}
         children={(
           <>
           <input name="name" id="place-name-input" type="text" placeholder="Название изображения" className="popup__input popup__input_image-name" minLength="2" maxLength="30" required/>
@@ -89,9 +85,10 @@ function closePopups(){
         <PopupWithForm 
         isOpen={isEditAvatarPopupOpen}
         onClose={closePopups}
+        name={'avatar'}
         form={'avatarAdd'}
         title={'Обновить аватар'}
-        name={'avatar'}
+        buttonText={'Сохранить'}
         children={(
           <>
           <input type="url" name="avatar" form="avatar-edit" required placeholder="Ссылка на картинку" className="popup__input popup__input_avatar-link" id="avatar-link-input"/>
@@ -99,17 +96,6 @@ function closePopups(){
           </>
         )}
         />
-
-        <PopupWithForm 
-        isOpen={isDeletePopupOpen}
-        onClose={'deleteConfirm'}
-        title={'Вы уверены?'}
-        name={'delete'}
-        children={(
-          <button type="submit" className="popup__submit">Да</button>
-        )}
-        />
-
 
         <ImagePopup
           card={selectedCard}
