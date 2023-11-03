@@ -6,7 +6,7 @@ function Card(props) {
     }
 
     return (
-        <figure className="cards__element">
+        <div className="cards__element">
             <button className="cards__delete" type="button"></button>
             <img className="cards__image" src={props.link} alt={props.name} title="Развернуть фото" onClick={handleClick} />
             <div className="cards__info">
@@ -16,7 +16,7 @@ function Card(props) {
                     <p className="cards__like-counter">{props.likes}</p>
                 </div>
             </div>
-        </figure>
+        </div>
     )
 }
 
