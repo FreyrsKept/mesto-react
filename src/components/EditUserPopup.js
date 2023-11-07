@@ -19,8 +19,8 @@ function EditUserPopup(props) {
         evt.preventDefault();
 
         props.onSubmit({
-        profile_name: name,
-        profile_job: description
+            profile_name: name,
+            profile_job: description
         });
     }
 
@@ -41,9 +41,9 @@ function EditUserPopup(props) {
             buttonText={'Сохранить'}
             onSubmit={handleSubmit}
         >
-            <input name="name" id="username-input" type="text" placeholder="Ваше имя" className="popup__input" minLength="2" maxLength="40" value={name} onChange={handleNameUpdate} required/>
+            <input name="name" id="username-input" type="text" placeholder="Ваше имя" className="popup__input" minLength="2" maxLength="40" value={name} onChange={handleNameUpdate} required />
             <span className="username-input-error popup__input-error"></span>
-            <input name="about" id="description-input" type="text" placeholder="Ваша профессия" className="popup__input" minLength="2" maxLength="200" value={description} onChange={handleDescriptionUpdate} required/>
+            <input name="about" id="description-input" type="text" placeholder="Ваша профессия" className="popup__input" minLength="2" maxLength="200" value={description} onChange={handleDescriptionUpdate} required />
             <span className="description-input-error popup__input-error"></span>
         </PopupWithForm>
     )

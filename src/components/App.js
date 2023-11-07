@@ -6,7 +6,6 @@ import Footer from './Footer';
 import PopupWithForm from "./PopupWithForm";
 import EditUserPopup from './EditUserPopup';
 import ImagePopup from "./ImagePopup";
-import './App.css';
 import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
