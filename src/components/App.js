@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import api from '../utils/Api';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from "./PopupWithForm";
+import EditUserPopup from './EditUserPopup';
 import ImagePopup from "./ImagePopup";
 import './App.css';
+import { CurrentUserContext } from "./CurrentUserContext";
 
 function App() {
 
@@ -12,6 +15,27 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(null)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(null)
   const [selectedCard, setSelectedCard] = React.useState(null)
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
+
+
+  useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([user, cards]) => {
+    setCurrentUser(user);
+    setCards(cards);
+  }).catch((err) => {
+  console.log(err);
+  })
+  }, []);
+
+  function handleUpdateUser(data) {
+    api.updateUserInfo(data).then((newUser) => {
+      setCurrentUser(newUser);
+      closePopups();
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
 function handleAvatarEdit(){
   setIsEditAvatarPopupOpen(true);
@@ -37,6 +61,7 @@ function closePopups(){
 }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className='page'>
       <div className='page__content'>
         <Header />
@@ -48,22 +73,11 @@ function closePopups(){
         />
         <Footer />
 
-        <PopupWithForm 
-        isOpen={isEditProfilePopupOpen}
-        onClose={closePopups}
-        name={'edit'}
-        form={'profileSettings'}
-        title={'Редактировать профиль'}
-        buttonText={'Сохранить'}
-        children={(
-          <>
-          <input name="name" id="username-input" type="text" placeholder="Ваше имя" className="popup__input" minLength="2" maxLength="40" required/>
-          <span className="username-input-error popup__input-error"></span>
-          <input name="about" id="description-input" type="text" placeholder="Ваша профессия" className="popup__input" minLength="2" maxLength="200" required/>
-          <span className="description-input-error popup__input-error"></span>
-          </>
-        )}
-        />
+        <EditUserPopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closePopups}
+          onSubmit={handleUpdateUser}
+          />
 
         <PopupWithForm 
         isOpen={isAddPlacePopupOpen}
@@ -103,6 +117,7 @@ function closePopups(){
         />
       </div>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
