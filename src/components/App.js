@@ -124,6 +124,7 @@ function App() {
       <div className='page'>
         <div className='page__content'>
           <Header />
+
           <Main
             onEditAvatar={handleAvatarEdit}
             onEditProfile={handleProfileEdit}
@@ -133,6 +134,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />
+
           <Footer />
 
           <EditProfilePopup
