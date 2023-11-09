@@ -2,13 +2,12 @@ import React from "react";
 import { CurrentUserContext } from './CurrentUserContext';
 
 function Card(props) {
+    const currentUser = React.useContext(CurrentUserContext);
+    const isOwn = props.card.owner._id === currentUser._id;
+    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    const cardDeleteButtonClassName = (`card__delete-button_inactive ${isOwn ? 'cards__delete' : ''}`);
+    const cardLikeButtonClassName = (`cards__like-button ${isLiked ? 'cards__like-button_active' : ''}`);
 
-  const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = props.card.owner._id === currentUser._id;
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
-  const cardDeleteButtonClassName = (`card__delete-button_inactive ${isOwn ? 'cards__delete' : ''}`);
-  const cardLikeButtonClassName = (`cards__like-button ${isLiked ? 'cards__like-button_active' : ''}`);
- 
     function handleClick() {
         props.onCardClick(props.card)
     };
@@ -28,7 +27,7 @@ function Card(props) {
             <div className="cards__info">
                 <h2 className="cards__title">{props.name}</h2>
                 <div className="cards__like-wrp">
-                    <button type="button" title="Нравится" className={cardLikeButtonClassName} onClick={handleCardLike}/>
+                    <button type="button" title="Нравится" className={cardLikeButtonClassName} onClick={handleCardLike} />
                     <p className="cards__like-counter">{props.likes}</p>
                 </div>
             </div>
