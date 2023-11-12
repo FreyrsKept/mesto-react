@@ -20,9 +20,10 @@ function Main(props) {
             </section>
             <section className="cards">
                 <ul className="cards__list">
-                    {props.cards.map((card, id) => (
+                    {props.cards.map((card) => (
                         <Card
-                            key={id}
+                            id={card._id}
+                            key={card._id}
                             card={card}
                             link={card.link}
                             name={card.name}
