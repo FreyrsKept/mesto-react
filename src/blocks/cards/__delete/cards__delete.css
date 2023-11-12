@@ -1,4 +1,5 @@
 .cards__delete {
+    display: none;
     background-image: url(../../../images/icons/trash.svg);
     background-position: center;
     background-size: contain;

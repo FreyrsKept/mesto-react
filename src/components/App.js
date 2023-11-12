@@ -10,7 +10,6 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
-
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -45,7 +44,8 @@ function App() {
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, selectedCard]);
 
   function handleCardLike(card) {
-    const isLiked = card.Likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    console.log(card);
     if (!isLiked) {
       api.setCardLike(card._id).then((newCard) => {
         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
@@ -62,7 +62,6 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    console.log(data);
     api.sendUserInfo(data).then((newUser) => {
       setCurrentUser(newUser);
       closePopups();
@@ -89,7 +88,6 @@ function App() {
   }
 
   function handleAvatarUpdate(data) {
-    console.log(data);
     api.setUserAvatar(data).then((newAvatar) => {
       setCurrentUser(newAvatar);
       closePopups();

@@ -6,6 +6,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
 /* основные */
 @import url(/src/vendor/normalize.css);
 @import url(/src/vendor/fonts/fonts.css);
@@ -32,7 +33,7 @@
 @import url(/src/blocks/cards/__like-counter/cards__like-counter.css);
 @import url(/src/blocks/cards/__like-button/_active/cards__like-button_active.css);
 @import url(/src/blocks/cards/__delete/cards__delete.css);
-@import url(/src/blocks/cards/__delete/_inactive/card__like-button_inactive.css);
+@import url(/src/blocks/cards/__delete/_active/cards__delete_active.css);
 @import url(/src/blocks/cards/__list/cards__list.css);
 @import url(/src/blocks/cards/__title/cards__title.css);
 /* подвал */
