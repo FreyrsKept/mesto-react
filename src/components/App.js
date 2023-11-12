@@ -14,7 +14,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
@@ -47,7 +47,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.Likes.some((i) => i._id === currentUser._id);
     if (!isLiked) {
-      api.addCardLike(card._id).then((newCard) => {
+      api.setCardLike(card._id).then((newCard) => {
         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       }).catch((err) => {
         console.log(err);
@@ -62,7 +62,8 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    api.updateUserInfo(data).then((newUser) => {
+    console.log(data);
+    api.sendUserInfo(data).then((newUser) => {
       setCurrentUser(newUser);
       closePopups();
     }).catch((err) => {
@@ -71,7 +72,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data) {
-    api.addNewCard(data).then((newCard) => {
+    api.sendNewCardInfo(data).then((newCard) => {
       setCards([newCard, ...cards]);
       closePopups();
     }).catch((err) => {
@@ -80,7 +81,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.removeCard(card).then(() => {
+    api.deleteCard(card).then(() => {
       setCards((items) => items.filter((c) => c._id !== card._id && c));
     }).catch((err) => {
       console.error(err);
@@ -88,7 +89,8 @@ function App() {
   }
 
   function handleAvatarUpdate(data) {
-    api.updateProfileAvatar(data).then((newAvatar) => {
+    console.log(data);
+    api.setUserAvatar(data).then((newAvatar) => {
       setCurrentUser(newAvatar);
       closePopups();
     }).catch((err) => {

@@ -18,23 +18,23 @@ class Api {
     })
   }
   // Метод отправки информации о пользователе
-  sendUserInfo(userData) {
+  sendUserInfo(data) {
     return this._request(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: `${userData.name}`,
-        about: `${userData.about}`
+        name: data.profile_name,
+        about: data.profile_job
       })
     })
   }
   // Метод установки аватара пользователя
-  setUserAvatar(avatarData) {
+  setUserAvatar(data) {
     return this._request(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: `${avatarData.avatar}`
+        avatar: data.avatar_link
       })
     })
   }
@@ -56,22 +56,22 @@ class Api {
     })
   }
   // Метод удаления карточки
-  deleteCard(id) {
-    return this._request(`${this._serverUrl}/cards/${id}`, {
+  deleteCard(data) {
+    return this._request(`${this._serverUrl}/cards/${data._id}`, {
       method: 'DELETE',
       headers: this._headers
     })
   }
   // Метод установки лайков
-  setCardLike(id) {
-    return this._request(`${this._serverUrl}/cards/${id}/likes`, {
+  setCardLike(cardId) {
+    return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
   }
   // Метод удаления лайка карточки
-  deleteCardLike(id) {
-    return this._request(`${this._serverUrl}/cards/${id}/likes`, {
+  deleteCardLike(cardId) {
+    return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })
